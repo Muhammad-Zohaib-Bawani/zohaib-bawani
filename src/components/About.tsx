@@ -1,91 +1,58 @@
-"use client";
+import { education, person } from '@/data/portfolio';
+import { SectionHeader } from './Section';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { portfolioData } from '@/data/portfolio';
-import { User, Code2, Rocket, Heart } from 'lucide-react';
-
-const stats = [
-  { icon: <Code2 className="text-primary" />, label: '3+ Years', sub: 'Experience' },
-  { icon: <Rocket className="text-secondary" />, label: '20+', sub: 'Projects Done' },
-  { icon: <Heart className="text-accent" />, label: '100%', sub: 'Dedication' },
-];
-
-export const About = () => {
+/*
+ * No portrait here on purpose. The previous avatar.png was a neon "cyberpunk
+ * hacker" illustration that fought the rest of the art direction. Drop a real
+ * photograph in and this can become a two-column layout again.
+ */
+export function About() {
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center gap-2 text-primary font-mono mb-4">
-              <span className="w-12 h-[1px] bg-primary"></span>
-              <span>About Me</span>
+    <section id="about" className="section border-t border-[var(--line)]">
+      <div className="shell">
+        <SectionHeader index="06" eyebrow="About" title="Who is writing this code." />
+
+        <div className="mt-14 grid gap-x-16 gap-y-14 md:mt-16 lg:grid-cols-[1.35fr_1fr]">
+          <div className="reveal">
+            {person.bio.map((p, i) => (
+              <p key={i} className="t-lead mt-6 max-w-[56ch] first:mt-0">
+                {p}
+              </p>
+            ))}
+          </div>
+
+          <aside className="reveal lg:pt-1">
+            <div className="panel-2 p-6 md:p-7">
+              <h3 className="t-label">At a glance</h3>
+              <dl className="mt-5 divide-y divide-[var(--line)]">
+                {[
+                  { k: 'Based in', v: person.location },
+                  { k: 'Focus', v: 'Full-stack product engineering' },
+                  { k: 'Primary stack', v: 'Next.js · .NET Core · SQL Server' },
+                  { k: 'Also comfortable in', v: 'Node.js · PostgreSQL · MongoDB' },
+                ].map((row) => (
+                  <div key={row.k} className="flex flex-wrap justify-between gap-x-6 gap-y-1 py-3">
+                    <dt className="t-label">{row.k}</dt>
+                    <dd className="t-mono text-[var(--ink-2)]">{row.v}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 tracking-tight">
-              A Passionate Developer <br />
-              <span className="text-gray-500">Based in Pakistan.</span>
-            </h2>
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
-              {portfolioData.personalInfo.summary}
-            </p>
-            
-            <div className="grid grid-cols-3 gap-6">
-              {stats.map((stat, index) => (
-                <div key={index} className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-primary/50 transition-colors">
-                  <div className="mb-2">{stat.icon}</div>
-                  <div className="text-xl font-bold">{stat.label}</div>
-                  <div className="text-xs text-gray-500 uppercase tracking-widest">{stat.sub}</div>
-                </div>
-              ))}
+
+            <div className="mt-8">
+              <h3 className="t-label">Education</h3>
+              <ul className="mt-5 space-y-5">
+                {education.map((e) => (
+                  <li key={e.degree}>
+                    <p className="text-[0.9375rem] leading-snug text-[var(--ink)]">{e.degree}</p>
+                    <p className="t-mono mt-1.5 text-[var(--ink-4)]">{e.institution}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
-          >
-            <div className="aspect-square rounded-3xl overflow-hidden glass border border-white/10 p-2">
-              <div className="w-full h-full rounded-2xl overflow-hidden relative group">
-                <img 
-                  src="/avatar.png" 
-                  alt={portfolioData.personalInfo.name} 
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60" />
-                
-                {/* Floating Elements */}
-                <div className="absolute top-10 left-10 p-4 glass rounded-2xl animate-float">
-                  <span className="text-primary font-bold">Full Stack</span>
-                </div>
-                <div className="absolute bottom-20 right-10 p-4 glass rounded-2xl animate-float-delayed">
-                  <span className="text-secondary font-bold">.NET/Node</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          </aside>
         </div>
       </div>
-      
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float 3s ease-in-out 1.5s infinite;
-        }
-      `}</style>
     </section>
   );
-};
+}

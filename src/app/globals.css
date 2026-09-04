@@ -1,148 +1,359 @@
 @import "tailwindcss";
 
-:root {
-  --background: 210 20% 98%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 221.2 83.2% 53.3%;
-  --primary-rgb: 37, 99, 235;
-  --secondary: 262.1 83.3% 57.8%;
-  --accent: 316.6 72.7% 52.2%;
-  --muted: 210 40% 96.1%;
-  --glass: hsla(0, 0%, 100%, 0.7);
-  --card-bg: hsla(0, 0%, 100%, 0.5);
-  --border: 214.3 31.8% 91.4%;
-  --border-opacity: 0.1;
-}
+/* ==================================================================
+   Design tokens
+   Dark-only. Deep navy ground, one signal blue, one telemetry amber.
+   ================================================================== */
 
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --primary: 199 89% 48%;
-  --primary-rgb: 0, 149, 255;
-  --secondary: 263.4 70% 50.4%;
-  --accent: 322.7 75.8% 48.4%;
-  --muted: 217.2 32.6% 17.5%;
-  --glass: hsla(222.2, 84%, 4.9%, 0.7);
-  --card-bg: hsla(217.2, 32.6%, 17.5%, 0.2);
-  --border: 217.2 32.6% 17.5%;
-  --border-opacity: 0.5;
+:root {
+  /* Ground */
+  --void: #05070d;
+  --surface: #0a0d16;
+  --surface-2: #0e121d;
+  --surface-3: #131826;
+
+  /* Ink */
+  --ink: #e9edf6;
+  --ink-2: #a8b2c6;
+  --ink-3: #6f7a91;
+  --ink-4: #4a5364;
+
+  /* Lines */
+  --line: rgb(255 255 255 / 0.07);
+  --line-2: rgb(255 255 255 / 0.12);
+  --line-3: rgb(255 255 255 / 0.2);
+
+  /* Accents — exactly two */
+  --signal: #5b8cff;
+  --signal-dim: #3d6ad4;
+  --signal-glow: rgb(91 140 255 / 0.16);
+  --amber: #e2b578;
+
+  /* Rhythm */
+  --gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --measure: 62ch;
+  --section-y: clamp(6rem, 11vw, 10rem);
+  --radius: 14px;
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: hsl(var(--background));
-  --color-foreground: hsl(var(--foreground));
-  --color-primary: hsl(var(--primary));
-  --color-secondary: hsl(var(--secondary));
-  --color-accent: hsl(var(--accent));
-  --color-muted: hsl(var(--muted));
-  --color-glass: var(--glass);
-  --color-card-bg: var(--card-bg);
-  --color-border-custom: hsla(var(--border) / var(--border-opacity));
-  
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-outfit: 'Outfit', sans-serif;
+  --color-void: var(--void);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-signal: var(--signal);
+  --color-amber: var(--amber);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
 }
 
+/* ==================================================================
+   Base
+   ================================================================== */
 
 @layer base {
   * {
     box-sizing: border-box;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    min-width: 0;
   }
 
   html {
     scroll-behavior: smooth;
+    /* Offset for the fixed nav when jumping to an anchor. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    background: var(--background);
-    color: var(--foreground);
-    overflow-x: hidden;
+    background: var(--void);
+    color: var(--ink);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    letter-spacing: -0.005em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  p { text-wrap: pretty; }
+
+  a { color: inherit; text-decoration: none; }
+
+  img, svg { display: block; max-width: 100%; }
 
   ::selection {
-    background: var(--primary);
-    color: #000;
-  }
-}
-
-@layer components {
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
+    background: var(--signal);
+    color: #04060c;
   }
 
-  ::-webkit-scrollbar-track {
-    background: var(--background);
+  /* Focus: visible on every interactive element, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
 
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--void); }
   ::-webkit-scrollbar-thumb {
-    background: var(--muted);
+    background: var(--surface-3);
+    border: 3px solid var(--void);
     border-radius: 10px;
   }
+  ::-webkit-scrollbar-thumb:hover { background: var(--ink-4); }
+}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
+/* ==================================================================
+   Type scale
+   ================================================================== */
+
+@layer components {
+  .t-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.6rem, 7.4vw, 5.75rem);
+    line-height: 0.95;
+    letter-spacing: -0.042em;
+    font-weight: 500;
   }
 
-  /* Glassmorphism */
-  .glass {
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--border);
+  .t-h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4vw, 3.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 500;
   }
 
-  .glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--border);
-    transition: all 0.3s ease;
+  .t-h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    font-weight: 500;
   }
 
-  .glass-card:hover {
-    background: var(--card-bg);
-    border-color: var(--primary);
-    box-shadow: 0 0 20px rgba(var(--primary), 0.15);
+  .t-lead {
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--ink-2);
   }
 
-  /* Glow effects */
-  .glow-primary {
-    text-shadow: 0 0 10px var(--primary);
+  .t-body { color: var(--ink-2); }
+
+  /* Mono label — the technical voice of the design system. */
+  .t-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
   }
 
-  .glow-secondary {
-    text-shadow: 0 0 10px var(--secondary);
+  .t-mono {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: -0.01em;
   }
 
-  .bg-glow-primary {
-    box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+  /* ================================================================
+     Layout
+     ================================================================ */
+
+  .shell {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
 
-  /* Animated Gradient Text */
-  .gradient-text {
-    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
+  .shell-wide {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
   }
 
-  /* Grid Background */
-  .bg-grid {
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  .section {
+    padding-block: var(--section-y);
+    position: relative;
+  }
+
+  /* Hairline that fades at both ends — the section seam. */
+  .seam {
+    height: 1px;
+    border: 0;
+    background: linear-gradient(90deg, transparent, var(--line-2) 22%, var(--line-2) 78%, transparent);
+  }
+
+  /* ================================================================
+     Surfaces
+     ================================================================ */
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  .panel-2 {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  /* Chip: a technology tag. Deliberately quiet — the list is not the point. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    color: var(--ink-2);
+    background: rgb(255 255 255 / 0.03);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    white-space: nowrap;
+  }
+
+  /* ================================================================
+     Buttons
+     ================================================================ */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding: 0.8rem 1.3rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: #05070d;
+  }
+  .btn-primary:hover { background: #fff; }
+
+  .btn-ghost {
+    border-color: var(--line-2);
+    color: var(--ink);
+  }
+  .btn-ghost:hover {
+    border-color: var(--line-3);
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .btn:active { transform: translateY(1px); }
+
+  /* Underline-on-hover link used for external references. */
+  .link-ext {
+    color: var(--ink);
+    background-image: linear-gradient(var(--signal), var(--signal));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.28s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+    padding-bottom: 1px;
+  }
+  .link-ext:hover {
+    background-size: 100% 1px;
+    color: var(--signal);
+  }
+
+  /* ================================================================
+     Ambient layer
+     ================================================================ */
+
+  /* Fine technical grid, faded out at the edges via mask. */
+  .grid-veil {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 35%, #000 0%, transparent 75%);
+  }
+
+  /* Very slow star drift. Transform-only, so it stays on the compositor. */
+  .drift {
+    animation: drift 240s linear infinite;
   }
 }
 
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
+/* ==================================================================
+   Motion
+   ================================================================== */
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-3%, -2%, 0); }
 }
 
+/* Orbit rotation for the hero system diagram. */
+@keyframes orbit {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Scroll reveal. The observer only adds .is-in; all motion lives here. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

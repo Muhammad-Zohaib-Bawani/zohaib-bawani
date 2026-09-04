@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Zohaib Bawani — Portfolio
 
-## Getting Started
+Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS v4 · TypeScript.
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where content lives
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All copy, projects, experience and capabilities are in a single file:
+[`src/data/portfolio.ts`](src/data/portfolio.ts). Sections render straight from it —
+edit that file, not the components, to change what the site says.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuration
 
-## Learn More
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_FORMSPREE_ENDPOINT` | Formspree form URL, e.g. `https://formspree.io/f/xxxxxxxx`. When unset, the contact section falls back to a direct email panel instead of rendering a form that would silently discard messages. |
 
-To learn more about Next.js, take a look at the following resources:
+Set it in `.env.local` for development and in the host's environment for production.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Also update `person.site` in `src/data/portfolio.ts` to the real production domain —
+it drives the canonical URL, Open Graph metadata, `sitemap.xml` and `robots.txt`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Assets to add
 
-## Deploy on Vercel
+- `public/resume.pdf` — the hero and contact sections both link to it.
+- An Open Graph image (`src/app/opengraph-image.png`, 1200×630) for link previews.
+- `public/avatar.png` is currently unused. The About section is text-only until a
+  real photograph replaces the AI-generated illustration that was there.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Dark only. Tokens are defined once at the top of [`src/app/globals.css`](src/app/globals.css):
+  a deep navy ground, one signal blue, one telemetry amber. No third accent.
+- Three typefaces with distinct jobs: Instrument Sans (display), Inter (body),
+  JetBrains Mono (labels, record names, diagram annotations).
+- The ambient star field is a canvas painted **once** on mount; its drift is a CSS
+  transform, so there is no animation frame loop. Diagrams are inline SVG + CSS.
+- Scroll reveals use one `IntersectionObserver` in `RevealObserver` for the whole
+  page. Elements opt in with `className="reveal"`, which keeps every section a
+  server component.
+- `prefers-reduced-motion` disables the drift, the orbits and the reveals.

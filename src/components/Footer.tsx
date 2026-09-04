@@ -1,26 +1,35 @@
-"use client";
+import { person } from '@/data/portfolio';
 
-import React from 'react';
-import { portfolioData } from '@/data/portfolio';
-
-export const Footer = () => {
+export function Footer() {
   return (
-    <footer className="py-12 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="text-xl font-bold tracking-tighter">
-          <span className="gradient-text">ZB.</span>
+    <footer className="border-t border-[var(--line)] py-12">
+      <div className="shell flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-display text-sm tracking-tight">{person.name}</p>
+          <p className="t-mono mt-1 text-[var(--ink-4)]">
+            {person.role} — {person.location}
+          </p>
         </div>
-        
-        <p className="text-gray-500 text-sm">
-          © {new Date().getFullYear()} {portfolioData.personalInfo.name}. All rights reserved.
-        </p>
-        
-        <div className="flex items-center gap-6 text-sm text-gray-500">
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#projects" className="hover:text-white transition-colors">Projects</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
-        </div>
+
+        <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
+          {[
+            { label: 'Work', href: '#work' },
+            { label: 'Experience', href: '#experience' },
+            { label: 'About', href: '#about' },
+            { label: 'Contact', href: '#contact' },
+          ].map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-sm text-[var(--ink-3)] transition-colors hover:text-[var(--ink)]"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+
+        <p className="t-mono text-[var(--ink-4)]">© {new Date().getFullYear()}</p>
       </div>
     </footer>
   );
-};
+}
