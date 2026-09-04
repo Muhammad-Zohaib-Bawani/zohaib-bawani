@@ -20,6 +20,7 @@ export default function BlogIndex() {
         <section className="section">
           <div className="shell">
             <SectionHeader
+              as="h1"
               index="04"
               eyebrow="Writing"
               title="Notes from the parts users never see."
@@ -40,6 +41,12 @@ export default function BlogIndex() {
                       </time>
                       <span className="h-px w-6 bg-[var(--line-2)]" aria-hidden />
                       <span className="t-label">{p.readingTime}</span>
+                      {p.medium && (
+                        <>
+                          <span className="h-px w-6 bg-[var(--line-2)]" aria-hidden />
+                          <span className="t-label text-[var(--ink-4)]">On Medium</span>
+                        </>
+                      )}
                     </div>
 
                     <h2 className="t-h3 mt-4 flex items-baseline gap-2 transition-colors group-hover:text-[var(--signal)]">

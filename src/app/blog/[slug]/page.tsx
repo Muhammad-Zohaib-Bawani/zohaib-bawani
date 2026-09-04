@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { type Block, posts, postBySlug } from '@/data/blog';
 import { person } from '@/data/portfolio';
 import { Footer } from '@/components/Footer';
@@ -30,8 +30,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url: `${person.site}/blog/${post.slug}`,
       publishedTime: post.date,
       authors: [person.name],
+      images: [{ url: post.cover, width: 2400, height: 1260, alt: post.title }],
     },
-    twitter: { card: 'summary_large_image', title: post.title, description: post.standfirst },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.standfirst,
+      images: [post.cover],
+    },
   };
 }
 
@@ -49,6 +55,7 @@ export default async function PostPage({ params }: Params) {
     dateModified: post.date,
     author: { '@type': 'Person', name: person.name, url: person.site },
     keywords: post.tags.join(', '),
+    image: `${person.site}${post.cover}`,
     mainEntityOfPage: `${person.site}/blog/${post.slug}`,
   };
 
@@ -105,6 +112,20 @@ export default async function PostPage({ params }: Params) {
               <p className="t-body text-[0.9375rem]">
                 Written by {person.name}, {person.role}.
               </p>
+              {post.medium && (
+                <a
+                  href={post.medium}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-baseline gap-2"
+                >
+                  <span className="link-ext t-mono">Also on Medium</span>
+                  <ArrowUpRight
+                    size={13}
+                    className="translate-y-0.5 text-[var(--ink-4)] transition-colors duration-200 group-hover:text-[var(--signal)]"
+                  />
+                </a>
+              )}
               <Link href="/#contact" className="btn btn-ghost">
                 Get in touch
               </Link>

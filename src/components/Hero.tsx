@@ -20,8 +20,11 @@ export function Hero() {
             <span className="hidden sm:inline"> — {person.location}</span>
           </p>
 
-          {/* The H1 is a claim about range, not a greeting. */}
+          {/* The H1 is a claim about range, not a greeting — but a search for the
+              name has to land here, so the name opens the heading for crawlers
+              and screen readers while the visual line stays the claim. */}
           <h1 className="reveal t-display mt-7" style={{ '--reveal-delay': '70ms' } as React.CSSProperties}>
+            <span className="sr-only">{person.name} — {person.role}. </span>
             {person.headline[0]}
             <br />
             <span className="text-[var(--ink-3)]">{person.headline[1]}</span>

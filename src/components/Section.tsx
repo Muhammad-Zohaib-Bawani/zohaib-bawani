@@ -13,6 +13,8 @@ export function SectionHeader({
   standfirst,
   align = 'left',
   className,
+  /** A standalone page's header is its h1; sections on the home page stay h2. */
+  as: Heading = 'h2',
 }: {
   index: string;
   eyebrow: string;
@@ -20,6 +22,7 @@ export function SectionHeader({
   standfirst?: string;
   align?: 'left' | 'center';
   className?: string;
+  as?: 'h1' | 'h2';
 }) {
   return (
     <header
@@ -40,7 +43,7 @@ export function SectionHeader({
         <span className="t-label">{eyebrow}</span>
       </div>
 
-      <h2 className="t-h2 mt-5 max-w-3xl">{title}</h2>
+      <Heading className="t-h2 mt-5 max-w-3xl">{title}</Heading>
 
       {standfirst && (
         <p

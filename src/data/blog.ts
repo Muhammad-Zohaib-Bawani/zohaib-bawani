@@ -22,6 +22,10 @@ export type Post = {
   /** ISO date, used for <time> and sitemap lastModified. */
   date: string;
   readingTime: string;
+  /** 2400x1260 social/hero image in /public. Source: content/blog/covers/. */
+  cover: string;
+  /** Where the piece is also published, if anywhere. */
+  medium?: string;
   tags: string[];
   body: Block[];
 };
@@ -34,6 +38,8 @@ export const posts: Post[] = [
       'Email hosting asks a customer to publish four DNS records at a registrar you do not control. Domain Connect is the standard that makes that a click — and here is what it actually specifies.',
     date: '2026-09-04',
     readingTime: '6 min read',
+    cover: '/blog/domain-connect-cover.png',
+    medium: 'https://medium.com/@zohaibbawani05/nobody-wants-to-add-an-mx-record-e3be8485a3e1',
     tags: ['DNS', 'Domain Connect', 'Email infrastructure', 'Onboarding'],
     body: [
       {

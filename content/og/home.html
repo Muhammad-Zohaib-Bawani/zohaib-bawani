@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #05070d;
+    --surface: #0a0d16;
+    --surface-2: #0e121d;
+    --ink: #e9edf6;
+    --ink-2: #a8b2c6;
+    --ink-3: #6f7a91;
+    --ink-4: #4a5364;
+    --line: rgb(255 255 255 / 0.07);
+    --line-2: rgb(255 255 255 / 0.12);
+    --signal: #5b8cff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background: var(--void);
+    color: var(--ink);
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.028) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.028) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(120% 110% at 50% 0%, #000 32%, transparent 80%);
+  }
+  .bloom {
+    position: absolute;
+    top: -340px; left: 50%; transform: translateX(-50%);
+    width: 1000px; height: 760px;
+    background: radial-gradient(circle, rgb(91 140 255 / 0.2), transparent 62%);
+  }
+  .star { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: rgb(255 255 255 / 0.5); }
+
+  .wrap {
+    position: relative; height: 100%;
+    padding: 70px 72px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .kicker { display: flex; align-items: center; gap: 13px; }
+  .kicker .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 14px rgb(91 140 255 / 0.8);
+  }
+  .kicker span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  h1 {
+    margin-top: 24px;
+    font-size: 92px; line-height: 1;
+    letter-spacing: -0.035em; font-weight: 600;
+  }
+  .role {
+    margin-top: 18px;
+    font-size: 27px; letter-spacing: -0.015em;
+    color: var(--signal); font-weight: 500;
+  }
+  .intro {
+    margin-top: 22px;
+    font-size: 19px; line-height: 1.5; color: var(--ink-2);
+    max-width: 60ch;
+  }
+
+  .stack { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 9px; }
+  .stack li {
+    list-style: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px; letter-spacing: 0.03em;
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+    background: rgb(255 255 255 / 0.03);
+    border-radius: 999px;
+    padding: 7px 14px;
+  }
+
+  .foot {
+    position: absolute; left: 72px; right: 72px; bottom: 46px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+  }
+  .foot span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: 0.05em; color: var(--ink-4);
+  }
+  .foot .live { color: var(--ink-3); }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="bloom"></div>
+  <div class="star" style="top:96px;  left:170px;  opacity:.4"></div>
+  <div class="star" style="top:150px; left:1010px; opacity:.34"></div>
+  <div class="star" style="top:300px; left:880px;  opacity:.26"></div>
+  <div class="star" style="top:470px; left:250px;  opacity:.3"></div>
+
+  <div class="wrap">
+    <div class="kicker">
+      <span class="dot"></span>
+      <span>Karachi, Pakistan &nbsp;·&nbsp; Available for work</span>
+    </div>
+
+    <h1>Zohaib Bawani</h1>
+    <p class="role">Full-Stack Software Engineer</p>
+
+    <p class="intro">
+      I build products end to end — interfaces, APIs, databases, authentication,
+      payments, and the email and DNS infrastructure underneath them.
+    </p>
+
+    <ul class="stack">
+      <li>Next.js</li>
+      <li>React</li>
+      <li>TypeScript</li>
+      <li>.NET Core</li>
+      <li>C#</li>
+      <li>Node.js</li>
+      <li>SQL Server</li>
+      <li>PostgreSQL</li>
+      <li>MongoDB</li>
+      <li>Azure</li>
+    </ul>
+
+    <div class="foot">
+      <span class="live">zohaibbawani.com</span>
+      <span>4+ years &nbsp;·&nbsp; Government, media &amp; SaaS platforms</span>
+    </div>
+  </div>
+</body>
+</html>
