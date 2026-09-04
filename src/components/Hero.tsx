@@ -65,7 +65,7 @@ export function Hero() {
             <div>
               <dt className="t-label">Currently</dt>
               <dd className="mt-1.5 text-sm text-[var(--ink-2)]">
-                Full-stack engineering at FarmaTrust
+                Full-stack engineering at MicrosysX
               </dd>
             </div>
             <div>

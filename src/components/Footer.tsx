@@ -13,10 +13,11 @@ export function Footer() {
 
         <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
           {[
-            { label: 'Work', href: '#work' },
-            { label: 'Experience', href: '#experience' },
-            { label: 'About', href: '#about' },
-            { label: 'Contact', href: '#contact' },
+            { label: 'Work', href: '/#work' },
+            { label: 'Experience', href: '/#experience' },
+            { label: 'Writing', href: '/blog' },
+            { label: 'About', href: '/#about' },
+            { label: 'Contact', href: '/#contact' },
           ].map((l) => (
             <a
               key={l.href}

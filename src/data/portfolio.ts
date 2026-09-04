@@ -19,7 +19,7 @@ export const person = {
     "I'm Zohaib Bawani, a full-stack engineer. I build products end to end — interfaces, APIs, databases, authentication, payments, and the email and DNS infrastructure underneath them.",
   /** About section. No "passionate", no "love turning ideas into reality". */
   bio: [
-    'I have been building production software for over three years, across government-scale visa systems, news platforms, event ticketing, and my own email hosting product.',
+    'I have been building production software for over four years, across government-scale visa systems, news platforms, event ticketing, and my own email hosting product.',
     'Most of that work has been full-stack by necessity rather than by title. Shipping a mailbox provisioning flow means writing the React that renders it, the .NET or Node service behind it, the SQL schema underneath, and then working out why a DKIM record has not propagated. I work at whichever layer the problem is on.',
     'I care about the parts users never see: authorization boundaries that actually hold, audit trails that survive a review, and billing logic that does not quietly double-charge someone.',
   ],
@@ -171,6 +171,8 @@ export const otherProjects = [
     description:
       'Event ticketing with seat and table selection, plus guest management covering travel and accommodation for attending parties. Dynamic forms and Ajax-driven interfaces over a .NET Core backend.',
     tech: ['.NET Core', 'Razor', 'jQuery', 'Ajax', 'SQL Server'],
+    /** No public URL: runs behind the client's own login. */
+    note: 'Private deployment — internal system, no public URL',
   },
   {
     name: 'Bow Valley Chauffeur',
@@ -178,6 +180,15 @@ export const otherProjects = [
     description:
       'A ride booking platform for a chauffeur service: REST APIs for booking management, Stripe integration for payments, and MongoDB for customer and booking records.',
     tech: ['Node.js', 'Express', 'MongoDB', 'Stripe'],
+    link: { label: 'bowvalleyc.com', href: 'https://bowvalleyc.com/' },
+  },
+  {
+    name: 'Lake Louise Tour & Travel',
+    category: 'Tour & transport website',
+    description:
+      'Client-facing website for a Canadian Rockies tour and chauffeur operator: tour and fleet pages, quote and booking enquiry flows, and Google Maps and review embeds, built responsive across devices.',
+    tech: ['WordPress', 'JavaScript', 'Responsive UI', 'SEO'],
+    link: { label: 'lakelouisetour.ca', href: 'https://lakelouisetour.ca/' },
   },
 ];
 
@@ -224,9 +235,9 @@ export const capabilities = [
 
 export const experience = [
   {
-    company: 'FarmaTrust',
-    role: 'Full-Stack Software Engineer',
-    period: 'Aug 2024 — Present',
+    company: 'MicrosysX',
+    role: 'Fullstack Software Engineer',
+    period: 'Aug 2024 – Present',
     summary: 'Full-stack delivery across Next.js frontends and .NET Core services.',
     points: [
       'Built full-stack applications in Next.js, including reusable UI components and frontend architecture.',
@@ -236,9 +247,9 @@ export const experience = [
     tech: ['Next.js', '.NET Core', 'C#', 'SQL Server', 'Azure DevOps'],
   },
   {
-    company: 'Dawn News',
-    role: 'Frontend Developer',
-    period: 'May 2024 — Jul 2024',
+    company: 'Dawn News — IT Department',
+    role: 'Frontend Engineer',
+    period: 'May 2023 – Jul 2024',
     summary: 'Modernised legacy publishing platforms at national news scale.',
     points: [
       'Rebuilt legacy websites on Next.js and improved performance and UX of existing platforms.',
@@ -250,7 +261,7 @@ export const experience = [
   {
     company: 'Steel Marketing',
     role: 'Frontend Developer (Remote)',
-    period: 'Nov 2023 — May 2024',
+    period: 'Nov 2022 – May 2023',
     summary: 'WordPress builds wired into CRM and lead automation.',
     points: [
       'Developed and customised WordPress websites.',

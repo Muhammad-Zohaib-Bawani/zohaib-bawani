@@ -12,7 +12,7 @@ export function Timeline() {
         <SectionHeader
           index="05"
           eyebrow="Experience"
-          title="Three years of production work."
+          title="Four years of production work."
           standfirst="Increasing ownership: from frontend builds, to platform work, to full-stack delivery across services and pipelines."
         />
 

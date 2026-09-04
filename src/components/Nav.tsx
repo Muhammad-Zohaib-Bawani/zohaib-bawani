@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+/** Root-relative so every link also works from /blog, not just the home page. */
 const LINKS = [
-  { label: 'Work', href: '#work' },
-  { label: 'Capabilities', href: '#capabilities' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'About', href: '#about' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Capabilities', href: '/#capabilities' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Writing', href: '/blog' },
+  { label: 'About', href: '/#about' },
 ];
 
 export function Nav() {
@@ -55,7 +57,7 @@ export function Nav() {
       >
         <nav className="shell-wide flex items-center justify-between" aria-label="Primary">
           <a
-            href="#top"
+            href="/"
             className="group flex items-baseline gap-2.5"
             aria-label="Zohaib Bawani — home"
           >
@@ -75,7 +77,7 @@ export function Nav() {
                 {l.label}
               </a>
             ))}
-            <a href="#contact" className="btn btn-ghost ml-3 py-2 text-[0.8125rem]">
+            <a href="/#contact" className="btn btn-ghost ml-3 py-2 text-[0.8125rem]">
               Let&rsquo;s build something
             </a>
           </div>
@@ -111,7 +113,7 @@ export function Nav() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setOpen(false)}
             className="btn btn-primary mt-8 justify-center"
           >

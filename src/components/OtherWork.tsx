@@ -1,3 +1,4 @@
+import { ArrowUpRight, Lock } from 'lucide-react';
 import { otherProjects } from '@/data/portfolio';
 import { SectionHeader } from './Section';
 
@@ -19,7 +20,7 @@ export function OtherWork() {
           {otherProjects.map((p, i) => (
             <article
               key={p.name}
-              className="reveal bg-[var(--surface)] p-7 transition-colors duration-300 hover:bg-[var(--surface-2)] md:p-9"
+              className="reveal bg-[var(--surface)] p-7 transition-colors duration-300 hover:bg-[var(--surface-2)] md:p-9 md:[&:last-child:nth-child(odd)]:col-span-2"
               style={{ '--reveal-delay': `${i * 80}ms` } as React.CSSProperties}
             >
               <span className="t-label">{p.category}</span>
@@ -32,6 +33,25 @@ export function OtherWork() {
                   </li>
                 ))}
               </ul>
+              {'link' in p && p.link ? (
+                <a
+                  href={p.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-6 flex items-baseline gap-2"
+                >
+                  <span className="link-ext t-mono">{p.link.label}</span>
+                  <ArrowUpRight
+                    size={13}
+                    className="translate-y-0.5 text-[var(--ink-4)] transition-colors duration-200 group-hover:text-[var(--signal)]"
+                  />
+                </a>
+              ) : 'note' in p && p.note ? (
+                <p className="t-mono mt-6 flex items-baseline gap-2 text-[var(--ink-4)]">
+                  <Lock size={12} className="translate-y-0.5" aria-hidden />
+                  {p.note}
+                </p>
+              ) : null}
             </article>
           ))}
         </div>
