@@ -15,7 +15,7 @@ export function Footer() {
           {[
             { label: 'Work', href: '/#work' },
             { label: 'Experience', href: '/#experience' },
-            { label: 'Writing', href: '/blog' },
+            { label: 'Blog', href: '/blog' },
             { label: 'About', href: '/#about' },
             { label: 'Contact', href: '/#contact' },
           ].map((l) => (

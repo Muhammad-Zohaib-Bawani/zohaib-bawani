@@ -12,7 +12,8 @@ export const person = {
   linkedin: 'https://linkedin.com/in/zaibing',
   github: 'https://github.com/Muhammad-Zohaib-Bawani',
   resume: '/resume.pdf',
-  site: 'https://zohaibbawani.com',
+  /** Canonical origin. Everything (metadataBase, sitemap, JSON-LD, OG URLs) derives from this one line. */
+  site: 'https://zohaib-bawani.vercel.app',
   /** Hero. Specific enough to be checkable, short enough to read in one breath. */
   headline: ['From DNS record', 'to rendered pixel.'],
   intro:
